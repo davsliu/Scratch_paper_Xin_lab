@@ -1,0 +1,15 @@
+import pandas as pd
+from pathlib import Path
+import numpy as np
+
+def get_physiological() -> pd.DataFrame:
+    fqpn = Path(r'Z:\Research\MRILab\TRAUMA-PTSD\research_projects\Brian_MLA\David')
+    df_ori = pd.read_excel(fqpn, engine ='openpyxl')
+    df_ori.to_feather(fqpn)
+    
+    df_edit = pd.read_excel(fqpn, engine = 'openpyxl')
+    df_edit.to_feather(fqpn)
+    df_edit.replace("n/a", np.nan, inplace = True) #replacing values listed as the string "n/a" to empty values
+    
+    return df_ori
+    return df_edit
