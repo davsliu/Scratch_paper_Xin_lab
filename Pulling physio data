@@ -2,14 +2,22 @@ import pandas as pd
 from pathlib import Path
 import numpy as np
 
-def get_physiological() -> pd.DataFrame:
-    fqpn = Path(r'Z:\Research\MRILab\TRAUMA-PTSD\research_projects\Brian_MLA\David')
-    df_ori = pd.read_excel(fqpn, engine ='openpyxl')
-    df_ori.to_feather(fqpn)
-    
-    df_edit = pd.read_excel(fqpn, engine = 'openpyxl')
-    df_edit.to_feather(fqpn)
-    df_edit.replace("n/a", np.nan, inplace = True) #replacing values listed as the string "n/a" to empty values
-    
-    return df_ori
+def get_physio():
+    fqpn = Path(r'Z:\Research\MRILab\TRAUMA-PTSD\research_projects\Brian_MLA\David\Vitals_david_copy.xlsx')
+    df_ori = pd.read_excel(r'Z:\Research\MRILab\TRAUMA-PTSD\research_projects\Brian_MLA\David\Vitals_david_copy.xlsx')
+    df_edit = pd.read_excel(r'Z:\Research\MRILab\TRAUMA-PTSD\research_projects\Brian_MLA\David\Vitals_david_copy.xlsx')
+    return df_ori 
     return df_edit
+
+#df_ori = pd.read_excel(r'Z:\Research\MRILab\TRAUMA-PTSD\research_projects\Brian_MLA\David\Vitals_david_copy.xlsx')
+#df_edit = pd.read_excel(r'Z:\Research\MRILab\TRAUMA-PTSD\research_projects\Brian_MLA\David\Vitals_david_copy.xlsx')
+
+
+#what percentage of data is missing per column
+df_edit.replace("n/a", np.nan, inplace = True)
+df_edit.isna().mean().round(3).multiply(100)
+
+
+#changing file to feather
+df_ori.to_feather(fqpn)
+df_edit.to_feather(fqpn)
